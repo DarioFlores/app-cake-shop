@@ -1,4 +1,4 @@
-package entities
+package domain
 
 type ComplexIngredient struct {
 	Name              string

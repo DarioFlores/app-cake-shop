@@ -1,6 +1,6 @@
-package gateway
+package simple_ingredient
 
-import "github.com/DarioFlores/app-cake-shop/entities"
+import "github.com/DarioFlores/app-cake-shop/domain"
 
 var simpleIngredientRepository SimpleIngredientRepository
 
@@ -16,6 +16,6 @@ func NewSimpleIngredientRepository() SimpleIngredientRepository {
 }
 
 type SimpleIngredientRepository interface {
-	Save(simpleIngredient *entities.SimpleIngredient) error
-	GetAll() ([]entities.SimpleIngredient, error)
+	Save(simpleIngredient *domain.SimpleIngredient) error
+	GetAll() ([]domain.SimpleIngredient, error)
 }

@@ -2,24 +2,20 @@ package main
 
 import (
 	"fmt"
-	"github.com/DarioFlores/app-cake-shop/entities"
-	"github.com/DarioFlores/app-cake-shop/gateway"
-	"github.com/DarioFlores/app-cake-shop/repository"
-	"github.com/DarioFlores/app-cake-shop/use_case"
+	"github.com/DarioFlores/app-cake-shop/interfaces/repository"
+	"github.com/DarioFlores/app-cake-shop/usecases/simple_ingredient"
 )
 
 func main() {
 	fmt.Println("AppCakeShop")
 	simpleIngredientRepository := repository.NewSimpleIngredientRepository()
-	gateway.RegisterSimpleIngredientRepository(simpleIngredientRepository)
-	saveSimpleIngredient := use_case.NewSaveSimpleIngredientUseCase()
-	simpleIngredient := entities.SimpleIngredient{
-		Name:         "Harina",
-		Price:        120,
-		Amount:       1,
-		Unit:         "KG",
-		FrequencyUse: 0,
-		LastModified: nil,
+	simple_ingredient.RegisterSimpleIngredientRepository(simpleIngredientRepository)
+	saveSimpleIngredient := simple_ingredient.NewSimpleIngredientUseCase()
+	simpleIngredient := simple_ingredient.SaveSimpleIngredientRequest{
+		Name:   "Harina",
+		Price:  120,
+		Amount: 1,
+		Unit:   "KG",
 	}
 	err := saveSimpleIngredient.Save(&simpleIngredient)
 

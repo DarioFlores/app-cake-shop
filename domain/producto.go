@@ -1,4 +1,4 @@
-package entities
+package domain
 
 type Product struct {
 	Nombre             string
