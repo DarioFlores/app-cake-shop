@@ -1,28 +1,30 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/DarioFlores/app-cake-shop/interfaces/repository"
-	"github.com/DarioFlores/app-cake-shop/usecases/simple_ingredient"
+	"github.com/DarioFlores/app-cake-shop/usecases"
 )
 
 func main() {
 	fmt.Println("AppCakeShop")
 	simpleIngredientRepository := repository.NewSimpleIngredientRepository()
-	simple_ingredient.RegisterSimpleIngredientRepository(simpleIngredientRepository)
-	saveSimpleIngredient := simple_ingredient.NewSimpleIngredientUseCase()
-	simpleIngredient := simple_ingredient.SaveSimpleIngredientRequest{
+	usecases.RegisterSimpleIngredientRepository(simpleIngredientRepository)
+	saveSimpleIngredient := usecases.NewSimpleIngredientUseCase()
+	simpleIngredient := usecases.CreateSimpleIngredient{
 		Name:   "Harina",
 		Price:  120,
 		Amount: 1,
 		Unit:   "KG",
 	}
-	err := saveSimpleIngredient.Save(&simpleIngredient)
+	err := saveSimpleIngredient.Create(&simpleIngredient)
 
 	if err != nil {
 		fmt.Println("Error al guardar ingrediente:", err.Error())
 	}
 	ingredients, _ := simpleIngredientRepository.GetAll()
 	fmt.Println("Salio todo bien")
-	fmt.Println(fmt.Sprintf("Ingredientes guardados: %+v", ingredients))
+	jsonIngredient, _ := json.MarshalIndent(ingredients, "", "    ")
+	fmt.Println(fmt.Sprintf("Ingredientes guardados: %s", jsonIngredient))
 }
