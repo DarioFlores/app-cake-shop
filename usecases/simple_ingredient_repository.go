@@ -5,17 +5,17 @@ import (
 	"log"
 )
 
-var simpleIngredientRepository SimpleIngredientRepository
+var instance SimpleIngredientRepository
 
 func RegisterSimpleIngredientRepository(repository SimpleIngredientRepository) {
-	simpleIngredientRepository = repository
+	instance = repository
 }
 
-func NewSimpleIngredientRepository() SimpleIngredientRepository {
-	if simpleIngredientRepository == nil {
-		log.Fatal("simpleIngredientRepository not found")
+func GetInstanceSimpleIngredientRepository() SimpleIngredientRepository {
+	if instance == nil {
+		log.Fatal("instance simpleIngredientRepository not found")
 	}
-	return simpleIngredientRepository
+	return instance
 }
 
 type SimpleIngredientRepository interface {

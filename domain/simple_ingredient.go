@@ -9,5 +9,5 @@ type SimpleIngredient struct {
 	Amount            float64
 	Unit              string
 	FrequencyUse      int
-	LastModifiedPrice *time.Time
+	LastModifiedPrice time.Time
 }
