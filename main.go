@@ -9,7 +9,7 @@ import (
 
 func main() {
 	fmt.Println("AppCakeShop")
-	simpleIngredientRepository := repository.NewSimpleIngredientRepository()
+	simpleIngredientRepository := repository.NewSimpleIngredientSliceRepository()
 	usecases.RegisterSimpleIngredientRepository(simpleIngredientRepository)
 	saveSimpleIngredient := usecases.NewSimpleIngredientUseCase()
 	simpleIngredient := usecases.CreateSimpleIngredient{
@@ -23,7 +23,7 @@ func main() {
 	if err != nil {
 		fmt.Println("Error al guardar ingrediente:", err.Error())
 	}
-	ingredients, _ := simpleIngredientRepository.GetAll()
+	ingredients, _ := simpleIngredientRepository.FindAll()
 	fmt.Println("Salio todo bien")
 	jsonIngredient, _ := json.MarshalIndent(ingredients, "", "    ")
 	fmt.Println(fmt.Sprintf("Ingredientes guardados: %s", jsonIngredient))
